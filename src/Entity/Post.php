@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,11 +39,26 @@ class Post
     private $content;
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     */
+    private $comments;
+
+    /**
+     * @return Collection
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
      * Post constructor.
      */
     public function __construct()
     {
         $this->publishedAt = new \DateTimeImmutable();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -99,4 +116,6 @@ class Post
     {
         $this->content = $content;
     }
+
+
 }

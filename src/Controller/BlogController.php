@@ -19,7 +19,7 @@ class BlogController extends AbstractController
      */
     public function index(): Response
     {
-        $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
+        $posts = $this->getDoctrine()->getRepository(Post::class)->getAllPosts();
         return $this->render("index.html.twig", [
             "posts" => $posts
         ]);
