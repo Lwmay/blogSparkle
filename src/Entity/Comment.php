@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -20,7 +21,17 @@ class Comment
 
     /**
      * @var string
+     * @ORM\Column
+     * @Assert\NotBlank
+     * @Assert\Length(min=2)
+     */
+    private $author;
+
+    /**
+     * @var string
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(min=5)
      */
     private $content;
 
@@ -29,12 +40,6 @@ class Comment
      * @ORM\Column(type="datetime_immutable")
      */
     private $postedAt;
-
-    /**
-     * @var string
-     * @ORM\Column
-     */
-    private $author;
 
     /**
      * @var Post

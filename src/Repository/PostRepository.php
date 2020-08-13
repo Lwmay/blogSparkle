@@ -20,9 +20,11 @@ class PostRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $page
+     * @param int $limit
      * @return array
      */
-    public function getAllPosts(): array
+    public function getPaginatedPosts(int $page, int $limit): array
     {
         return $this->createQueryBuilder("p")
             ->addSelect("c")
