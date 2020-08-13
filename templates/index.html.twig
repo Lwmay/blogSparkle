@@ -12,17 +12,27 @@
     <ul>
         {% if page > 1 %}
             <li>
-                <a href="{{ path("index", {page: p - 1}) }}">Précedent</a>
+                <a href="{{ path("index", {page: 1}) }}">Première page</a>
             </li>
         {% endif %}
-        {% for p in 1..pages %}
+        {% if page > 1 %}
+            <li>
+                <a href="{{ path("index", {page: page - 1}) }}">Précedent</a>
+            </li>
+        {% endif %}
+        {% for p in range %}
             <li>
                 <a href="{{ path("index", {page: p}) }}">{{ p }}</a>
             </li>
         {% endfor %}
         {% if page < pages %}
             <li>
-                <a href="{{ path("index", {page: p + 1}) }}">Suivant</a>
+                <a href="{{ path("index", {page: page + 1}) }}">Suivant</a>
+            </li>
+        {% endif %}
+        {% if page < pages %}
+            <li>
+                <a href="{{ path("index", {page: pages}) }}">Dernière page</a>
             </li>
         {% endif %}
     </ul>

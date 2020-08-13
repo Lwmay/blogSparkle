@@ -31,12 +31,17 @@ class BlogController extends AbstractController
             $limit
         );
         $pages = ceil($total / 10);
+        $range = range(
+            max($page -3, 1),
+            min($page +3, $pages)
+        );
 
         return $this->render("index.html.twig", [
             "posts" => $posts,
             "pages" => $pages,
             "page" => $page,
-            "limit" => $limit
+            "limit" => $limit,
+            "range" => $range
         ]);
     }
 
