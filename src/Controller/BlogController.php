@@ -83,7 +83,7 @@ class BlogController extends AbstractController
     {
         $post = new Post();
 
-        $form = $this->createForm(PostType::class, $post)->handleRequest();
+        $form = $this->createForm(PostType::class, $post)->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->persist($post);
