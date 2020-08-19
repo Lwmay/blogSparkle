@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -23,8 +24,25 @@ class Post
     /**
      * @var string
      * @ORM\Column
+     * @Assert\NotBlank
      */
     private string $title;
+
+    /**
+     * @return string|null
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string|null $image
+     */
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
+    }
 
     /**
      * @var \DateTimeImmutable
@@ -33,8 +51,16 @@ class Post
     private $publishedAt;
 
     /**
+     * @var string|null
+     * @ORM\Column
+     */
+    private ?string $image = null;
+
+    /**
      * @var string
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(min=10)
      */
     private $content;
 
